@@ -3,8 +3,9 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "level-01.tmx",
+    "activeFile": "level-02.tmx",
     "expandedProjectPaths": [
+        "."
     ],
     "fileStates": {
         "Pixel Adventure.tsx": {
@@ -21,6 +22,14 @@
                 "x": 319.92017959590925,
                 "y": 183.42728860064855
             }
+        },
+        "level-02.tmx": {
+            "scale": 3.13203125,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 320.2394612122724,
+                "y": 184.06585183337492
+            }
         }
     },
     "last.imagePath": "/home/alexandreqc26/Projets/Flutter/flutter_platform_game/assets/images/Terrain",
@@ -31,12 +40,14 @@
     "map.width": 40,
     "openFiles": [
         "Pixel Adventure.tsx",
-        "level-01.tmx"
+        "level-01.tmx",
+        "level-02.tmx"
     ],
     "project": "Pixel_Adventure.tiled-project",
     "recentFiles": [
         "Pixel Adventure.tsx",
-        "level-01.tmx"
+        "level-01.tmx",
+        "level-02.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {

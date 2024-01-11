@@ -8,6 +8,12 @@ enum PlayerState {
   running,
 }
 
+enum PlayerDirection {
+  left,
+  right,
+  none,
+}
+
 class Player extends SpriteAnimationGroupComponent
     with HasGameRef<PixelAdventure> {
   String character;
@@ -17,10 +23,21 @@ class Player extends SpriteAnimationGroupComponent
   late final SpriteAnimation runningAnimation;
   final double stepTime = 0.05;
 
+  PlayerDirection playerDirection = PlayerDirection.none;
+  double moveSpeed = 100;
+  Vector2 velocity = Vector2.zero();
+  bool isFacingRight = true;
+
   @override
   FutureOr<void> onLoad() {
     _loadAllAnimation();
     return super.onLoad();
+  }
+
+  @override
+  void update(double dt) {
+    _updatePlayerMovement(dt);
+    super.update(dt);
   }
 
   void _loadAllAnimation() {
@@ -46,5 +63,34 @@ class Player extends SpriteAnimationGroupComponent
         textureSize: Vector2.all(32),
       ),
     );
+  }
+
+  void _updatePlayerMovement(double dt) {
+    double dirX = 0.0;
+    switch (playerDirection) {
+      case PlayerDirection.left:
+        if (isFacingRight) {
+          flipHorizontallyAroundCenter();
+          isFacingRight = false;
+        }
+        current = PlayerState.running;
+        dirX -= moveSpeed;
+        break;
+      case PlayerDirection.right:
+        if (!isFacingRight) {
+          flipHorizontallyAroundCenter();
+          isFacingRight = true;
+        }
+        current = PlayerState.running;
+        dirX += moveSpeed;
+        break;
+      case PlayerDirection.none:
+        current = PlayerState.idle;
+        break;
+      default:
+    }
+
+    velocity = Vector2(dirX, 0.0);
+    position += velocity * dt;
   }
 }
