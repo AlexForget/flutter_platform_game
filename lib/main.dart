@@ -4,10 +4,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:platfom_game/pixel_adventure.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Flame.device.fullScreen();
-  Flame.device.setLandscape();
+  await Flame.device.fullScreen();
+  await Flame.device.setLandscape();
 
   PixelAdventure game = PixelAdventure();
   runApp(GameWidget(game: kDebugMode ? PixelAdventure() : game));
@@ -16,3 +16,6 @@ void main() {
 
 
 //TODO Credited Pixel frog for the assets
+//TODO Credited Spellthorn for the tutorial
+
+//TODO Add controller support
