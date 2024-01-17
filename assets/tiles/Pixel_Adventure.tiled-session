@@ -24,6 +24,9 @@
             }
         },
         "level-02.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
             "scale": 3.13203125,
             "selectedLayer": 1,
             "viewCenter": {
