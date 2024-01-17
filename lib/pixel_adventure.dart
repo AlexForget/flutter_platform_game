@@ -6,8 +6,8 @@ import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 import 'package:flame/palette.dart';
 import 'package:flutter/painting.dart';
-import 'package:platfom_game/actors/player.dart';
-import 'package:platfom_game/levels/level.dart';
+import 'package:platfom_game/components/player.dart';
+import 'package:platfom_game/components/level.dart';
 
 class PixelAdventure extends FlameGame
     with HasKeyboardHandlerComponents, DragCallbacks {
@@ -16,7 +16,7 @@ class PixelAdventure extends FlameGame
   late final CameraComponent cam;
   Player player = Player(character: 'Mask Dude');
   late JoystickComponent joystick;
-  bool showJoystick = true;
+  bool showJoystick = false;
 
   @override
   FutureOr<void> onLoad() async {
@@ -26,7 +26,7 @@ class PixelAdventure extends FlameGame
     @override
     final world = Level(
       player: player,
-      levelName: 'level-01.tmx',
+      levelName: 'level-02.tmx',
     );
 
     cam = CameraComponent.withFixedResolution(
@@ -88,25 +88,25 @@ class PixelAdventure extends FlameGame
   void updateJoystick() {
     switch (joystick.direction) {
       case JoystickDirection.left:
-        player.playerDirection = PlayerDirection.left;
+        player.horizontalMovement = -1;
         break;
       case JoystickDirection.upLeft:
-        player.playerDirection = PlayerDirection.left;
+        player.horizontalMovement = -1;
         break;
       case JoystickDirection.downLeft:
-        player.playerDirection = PlayerDirection.left;
+        player.horizontalMovement = -1;
         break;
       case JoystickDirection.right:
-        player.playerDirection = PlayerDirection.right;
+        player.horizontalMovement = 1;
         break;
       case JoystickDirection.upRight:
-        player.playerDirection = PlayerDirection.right;
+        player.horizontalMovement = 1;
         break;
       case JoystickDirection.downRight:
-        player.playerDirection = PlayerDirection.right;
+        player.horizontalMovement = 1;
         break;
       default:
-        player.playerDirection = PlayerDirection.none;
+        player.horizontalMovement = 0;
         break;
     }
   }
