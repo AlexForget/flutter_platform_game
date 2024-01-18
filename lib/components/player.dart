@@ -4,7 +4,8 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/services.dart';
 import 'package:platfom_game/components/collision_block.dart';
-import 'package:platfom_game/components/player_hitbox.dart';
+import 'package:platfom_game/components/custom_hitbox.dart';
+import 'package:platfom_game/components/fruit.dart';
 import 'package:platfom_game/components/utils.dart';
 import 'package:platfom_game/pixel_adventure.dart';
 
@@ -16,7 +17,7 @@ enum PlayerState {
 }
 
 class Player extends SpriteAnimationGroupComponent
-    with HasGameRef<PixelAdventure>, KeyboardHandler {
+    with HasGameRef<PixelAdventure>, KeyboardHandler, CollisionCallbacks {
   String character;
   Player({
     position,
@@ -38,7 +39,7 @@ class Player extends SpriteAnimationGroupComponent
   bool isOnGround = false;
   bool hasJump = false;
   List<CollisionBlock> collisionsBlocks = [];
-  PlayerHitbox hitbox = PlayerHitbox(
+  CustomHitbox hitbox = CustomHitbox(
     offsetX: 10,
     offsetY: 4,
     width: 14,
@@ -81,6 +82,12 @@ class Player extends SpriteAnimationGroupComponent
         keysPressed.contains(LogicalKeyboardKey.arrowUp);
 
     return super.onKeyEvent(event, keysPressed);
+  }
+
+  @override
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
+    if (other is Fruit) other.collidedWithPlayer();
+    super.onCollision(intersectionPoints, other);
   }
 
   void _loadAllAnimation() {
