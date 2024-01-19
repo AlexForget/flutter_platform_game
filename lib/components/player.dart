@@ -297,9 +297,10 @@ class Player extends SpriteAnimationGroupComponent
       reachCheckpoint = false;
       position = Vector2.all(-640);
 
-      const waitToChangeDuration = Duration(seconds: 3);
-      Future.delayed(waitToChangeDuration);
-      // switch level
+      const waitToChangeDuration = Duration(seconds: 1);
+      Future.delayed(waitToChangeDuration, () {
+        game.loadNextLevel();
+      });
     });
   }
 }
