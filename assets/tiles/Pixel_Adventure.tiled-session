@@ -18,10 +18,10 @@
                 2
             ],
             "scale": 3.13203125,
-            "selectedLayer": 1,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 319.600897979546,
-                "y": 183.74657021701174
+                "x": 319.2816163631829,
+                "y": 183.42728860064855
             }
         },
         "level-02.tmx": {
@@ -33,7 +33,74 @@
             "selectedLayer": 2,
             "viewCenter": {
                 "x": 319.92017959590925,
-                "y": 183.10800698428537
+                "y": 182.78872536792218
+            }
+        },
+        "level-03.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 3.13203125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 320.2394612122724,
+                "y": 184.06585183337492
+            }
+        },
+        "level-04.tmx": {
+            "scale": 3.13203125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 320.2394612122724,
+                "y": 184.06585183337492
+            }
+        },
+        "level-05.tmx": {
+            "scale": 3.13203125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 320.2394612122724,
+                "y": 184.06585183337492
+            }
+        },
+        "level-06.tmx": {
+            "scale": 3.13203125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 320.2394612122724,
+                "y": 184.06585183337492
+            }
+        },
+        "level-07.tmx": {
+            "scale": 3.13203125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 320.2394612122724,
+                "y": 184.06585183337492
+            }
+        },
+        "level-08.tmx": {
+            "scale": 3.13203125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 320.2394612122724,
+                "y": 184.06585183337492
+            }
+        },
+        "level-09.tmx": {
+            "scale": 3.13203125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 320.2394612122724,
+                "y": 184.06585183337492
+            }
+        },
+        "level-10.tmx": {
+            "scale": 3.13203125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 320.2394612122724,
+                "y": 184.06585183337492
             }
         }
     },

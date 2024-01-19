@@ -11,8 +11,6 @@ class Checkpoint extends SpriteAnimationComponent
     size,
   }) : super(position: position, size: size);
 
-  bool reachCheckpoint = false;
-
   @override
   FutureOr<void> onLoad() {
     // debugMode = true;
@@ -37,13 +35,13 @@ class Checkpoint extends SpriteAnimationComponent
   }
 
   @override
-  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
-    if (other is Player && !reachCheckpoint) _reachCheckpoint();
-    super.onCollision(intersectionPoints, other);
+  void onCollisionStart(
+      Set<Vector2> intersectionPoints, PositionComponent other) {
+    if (other is Player) _reachCheckpoint();
+    super.onCollisionStart(intersectionPoints, other);
   }
 
-  void _reachCheckpoint() {
-    reachCheckpoint = true;
+  Future<void> _reachCheckpoint() async {
     animation = SpriteAnimation.fromFrameData(
       game.images.fromCache(
           'Items/Checkpoints/Checkpoint/Checkpoint (Flag Out) (64x64).png'),
@@ -55,17 +53,16 @@ class Checkpoint extends SpriteAnimationComponent
       ),
     );
 
-    const flagDuration = Duration(milliseconds: 20 * 26);
-    Future.delayed(flagDuration, () {
-      animation = SpriteAnimation.fromFrameData(
-        game.images.fromCache(
-            'Items/Checkpoints/Checkpoint/Checkpoint (Flag Idle)(64x64).png'),
-        SpriteAnimationData.sequenced(
-          amount: 10,
-          stepTime: 0.05,
-          textureSize: Vector2.all(64),
-        ),
-      );
-    });
+    await animationTicker?.completed;
+
+    animation = SpriteAnimation.fromFrameData(
+      game.images.fromCache(
+          'Items/Checkpoints/Checkpoint/Checkpoint (Flag Idle)(64x64).png'),
+      SpriteAnimationData.sequenced(
+        amount: 10,
+        stepTime: 0.05,
+        textureSize: Vector2.all(64),
+      ),
+    );
   }
 }

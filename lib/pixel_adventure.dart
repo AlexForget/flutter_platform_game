@@ -21,8 +21,21 @@ class PixelAdventure extends FlameGame
   late CameraComponent cam;
   Player player = Player(character: 'Mask Dude');
   late JoystickComponent joystick;
-  bool showControls = true;
-  List<String> levelNames = ['level-01.tmx', 'level-02.tmx'];
+  bool showControls = false;
+  bool playSounds = true;
+  double soundVolume = 1.0;
+  List<String> levelNames = [
+    'level-01.tmx',
+    'level-02.tmx',
+    'level-03.tmx',
+    'level-04.tmx',
+    'level-05.tmx',
+    'level-06.tmx',
+    'level-07.tmx',
+    'level-08.tmx',
+    'level-09.tmx',
+    'level-10.tmx',
+  ];
   int currentLevelIndex = 1;
 
   @override
@@ -107,11 +120,15 @@ class PixelAdventure extends FlameGame
   }
 
   void loadNextLevel() {
+    removeWhere((component) => component is Level);
+
     if (currentLevelIndex < levelNames.length - 1) {
       currentLevelIndex++;
       _loadLevel();
     } else {
       // no more level
+      currentLevelIndex = 0;
+      _loadLevel();
     }
   }
 
