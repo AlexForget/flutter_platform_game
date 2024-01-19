@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:platfom_game/components/player.dart';
 
 class Checkpoint extends SpriteAnimationComponent
     with HasGameRef, CollisionCallbacks {
@@ -10,13 +11,16 @@ class Checkpoint extends SpriteAnimationComponent
     size,
   }) : super(position: position, size: size);
 
+  bool reachCheckpoint = false;
+
   @override
   FutureOr<void> onLoad() {
-    debugMode = true;
+    // debugMode = true;
     add(
       RectangleHitbox(
         position: Vector2(18, 16),
         size: Vector2(12, 50),
+        collisionType: CollisionType.passive,
       ),
     );
 
@@ -30,5 +34,38 @@ class Checkpoint extends SpriteAnimationComponent
       ),
     );
     return super.onLoad();
+  }
+
+  @override
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
+    if (other is Player && !reachCheckpoint) _reachCheckpoint();
+    super.onCollision(intersectionPoints, other);
+  }
+
+  void _reachCheckpoint() {
+    reachCheckpoint = true;
+    animation = SpriteAnimation.fromFrameData(
+      game.images.fromCache(
+          'Items/Checkpoints/Checkpoint/Checkpoint (Flag Out) (64x64).png'),
+      SpriteAnimationData.sequenced(
+        amount: 26,
+        stepTime: 0.02,
+        textureSize: Vector2.all(64),
+        loop: false,
+      ),
+    );
+
+    const flagDuration = Duration(milliseconds: 20 * 26);
+    Future.delayed(flagDuration, () {
+      animation = SpriteAnimation.fromFrameData(
+        game.images.fromCache(
+            'Items/Checkpoints/Checkpoint/Checkpoint (Flag Idle)(64x64).png'),
+        SpriteAnimationData.sequenced(
+          amount: 10,
+          stepTime: 0.05,
+          textureSize: Vector2.all(64),
+        ),
+      );
+    });
   }
 }
