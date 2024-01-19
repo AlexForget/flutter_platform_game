@@ -1,25 +1,29 @@
 import 'dart:async';
 
-import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 import 'package:flame/palette.dart';
 import 'package:flutter/painting.dart';
+import 'package:platfom_game/components/jump_button.dart';
 import 'package:platfom_game/components/player.dart';
 import 'package:platfom_game/components/level.dart';
 
 class PixelAdventure extends FlameGame
-    with HasKeyboardHandlerComponents, DragCallbacks, HasCollisionDetection {
+    with
+        HasKeyboardHandlerComponents,
+        DragCallbacks,
+        HasCollisionDetection,
+        TapCallbacks {
   @override
   Color backgroundColor() => const Color(0xff211f30);
   late CameraComponent cam;
   Player player = Player(character: 'Mask Dude');
   late JoystickComponent joystick;
-  bool showJoystick = false;
-  List<String> levelNames = ['level-02.tmx', 'level-01.tmx'];
-  int currentLevelIndex = 0;
+  bool showControls = true;
+  List<String> levelNames = ['level-01.tmx', 'level-02.tmx'];
+  int currentLevelIndex = 1;
 
   @override
   FutureOr<void> onLoad() async {
@@ -28,8 +32,9 @@ class PixelAdventure extends FlameGame
 
     _loadLevel();
 
-    if (showJoystick) {
+    if (showControls) {
       addJoystick();
+      add(JumpButton());
     }
 
     return super.onLoad();
@@ -37,7 +42,7 @@ class PixelAdventure extends FlameGame
 
   @override
   void update(double dt) {
-    if (showJoystick) {
+    if (showControls) {
       updateJoystick();
     }
     super.update(dt);
@@ -46,6 +51,7 @@ class PixelAdventure extends FlameGame
   // Adding joystick with included component
   void addJoystick() {
     joystick = JoystickComponent(
+      priority: 10,
       knob: CircleComponent(
         radius: 20,
         paint: BasicPalette.gray.paint(),
