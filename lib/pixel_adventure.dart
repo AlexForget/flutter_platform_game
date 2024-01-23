@@ -5,7 +5,6 @@ import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame/palette.dart';
 import 'package:flutter/painting.dart';
-import 'package:platfom_game/components/joystick.dart';
 import 'package:platfom_game/components/jump_button.dart';
 import 'package:platfom_game/components/left_button.dart';
 import 'package:platfom_game/components/player.dart';
@@ -22,7 +21,6 @@ class PixelAdventure extends FlameGame
   Color backgroundColor() => const Color(0xff211f30);
   late CameraComponent cam;
   Player player = Player(character: 'Mask Dude');
-  late Joystick joystick;
   bool showControls = true;
   bool playSounds = true;
   double soundVolume = 1.0;
@@ -70,7 +68,7 @@ class PixelAdventure extends FlameGame
   }
 
   void _loadLevel() {
-    Future.delayed(const Duration(seconds: 1), () {
+    Future.delayed(const Duration(milliseconds: 500), () {
       Level world = Level(
         player: player,
         levelName: levelNames[currentLevelIndex],
