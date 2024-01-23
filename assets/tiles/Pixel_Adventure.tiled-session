@@ -14,26 +14,26 @@
         },
         "level-01.tmx": {
             "expandedObjectLayers": [
-                3,
-                2
+                2,
+                3
             ],
             "scale": 3.13203125,
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 319.2816163631829,
-                "y": 183.42728860064855
+                "y": 183.10800698428537
             }
         },
         "level-02.tmx": {
             "expandedObjectLayers": [
-                3,
-                2
+                2,
+                3
             ],
             "scale": 3.13203125,
             "selectedLayer": 2,
             "viewCenter": {
                 "x": 319.92017959590925,
-                "y": 182.78872536792218
+                "y": 182.469443751559
             }
         },
         "level-03.tmx": {
@@ -41,66 +41,84 @@
                 2
             ],
             "scale": 3.13203125,
-            "selectedLayer": 0,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 320.2394612122724,
-                "y": 184.06585183337492
+                "x": 319.92017959590925,
+                "y": 183.74657021701174
             }
         },
         "level-04.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
             "scale": 3.13203125,
-            "selectedLayer": 0,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 320.2394612122724,
-                "y": 184.06585183337492
+                "x": 319.92017959590925,
+                "y": 183.74657021701174
             }
         },
         "level-05.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
             "scale": 3.13203125,
-            "selectedLayer": 0,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 320.2394612122724,
-                "y": 184.06585183337492
+                "x": 319.92017959590925,
+                "y": 183.74657021701174
             }
         },
         "level-06.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
             "scale": 3.13203125,
-            "selectedLayer": 0,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 320.2394612122724,
-                "y": 184.06585183337492
+                "x": 319.92017959590925,
+                "y": 183.74657021701174
             }
         },
         "level-07.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
             "scale": 3.13203125,
-            "selectedLayer": 0,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 320.2394612122724,
-                "y": 184.06585183337492
+                "x": 319.92017959590925,
+                "y": 183.74657021701174
             }
         },
         "level-08.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
             "scale": 3.13203125,
-            "selectedLayer": 0,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 320.2394612122724,
-                "y": 184.06585183337492
+                "x": 319.92017959590925,
+                "y": 183.74657021701174
             }
         },
         "level-09.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
             "scale": 3.13203125,
-            "selectedLayer": 0,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 320.2394612122724,
-                "y": 184.06585183337492
+                "x": 319.92017959590925,
+                "y": 183.74657021701174
             }
         },
         "level-10.tmx": {
             "scale": 3.13203125,
-            "selectedLayer": 0,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 320.2394612122724,
-                "y": 184.06585183337492
+                "x": 319.92017959590925,
+                "y": 183.74657021701174
             }
         }
     },
