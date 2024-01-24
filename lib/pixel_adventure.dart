@@ -21,8 +21,8 @@ class PixelAdventure extends FlameGame
   Color backgroundColor() => const Color(0xff211f30);
   late CameraComponent cam;
   Player player = Player(character: 'Mask Dude');
-  bool showControls = true;
-  bool playSounds = true;
+  bool showControls = false;
+  bool playSounds = false;
   double soundVolume = 1.0;
   List<String> levelNames = [
     'level-01.tmx',

@@ -14,26 +14,26 @@
         },
         "level-01.tmx": {
             "expandedObjectLayers": [
-                2,
-                3
+                3,
+                2
             ],
             "scale": 3.13203125,
-            "selectedLayer": 0,
+            "selectedLayer": 2,
             "viewCenter": {
                 "x": 319.2816163631829,
-                "y": 183.10800698428537
+                "y": 182.78872536792218
             }
         },
         "level-02.tmx": {
             "expandedObjectLayers": [
-                2,
-                3
+                3,
+                2
             ],
             "scale": 3.13203125,
             "selectedLayer": 2,
             "viewCenter": {
                 "x": 319.92017959590925,
-                "y": 182.469443751559
+                "y": 182.15016213519584
             }
         },
         "level-03.tmx": {
@@ -43,8 +43,8 @@
             "scale": 3.13203125,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 319.92017959590925,
-                "y": 183.74657021701174
+                "x": 319.7605387877276,
+                "y": 184.06585183337492
             }
         },
         "level-04.tmx": {
@@ -54,8 +54,8 @@
             "scale": 3.13203125,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 319.92017959590925,
-                "y": 183.74657021701174
+                "x": 319.7605387877276,
+                "y": 184.06585183337492
             }
         },
         "level-05.tmx": {
@@ -65,8 +65,8 @@
             "scale": 3.13203125,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 319.92017959590925,
-                "y": 183.74657021701174
+                "x": 319.7605387877276,
+                "y": 184.06585183337492
             }
         },
         "level-06.tmx": {
@@ -76,8 +76,8 @@
             "scale": 3.13203125,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 319.92017959590925,
-                "y": 183.74657021701174
+                "x": 319.7605387877276,
+                "y": 184.06585183337492
             }
         },
         "level-07.tmx": {
@@ -87,8 +87,8 @@
             "scale": 3.13203125,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 319.92017959590925,
-                "y": 183.74657021701174
+                "x": 319.7605387877276,
+                "y": 184.06585183337492
             }
         },
         "level-08.tmx": {
@@ -98,8 +98,8 @@
             "scale": 3.13203125,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 319.92017959590925,
-                "y": 183.74657021701174
+                "x": 319.7605387877276,
+                "y": 184.06585183337492
             }
         },
         "level-09.tmx": {
@@ -109,16 +109,19 @@
             "scale": 3.13203125,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 319.92017959590925,
-                "y": 183.74657021701174
+                "x": 319.7605387877276,
+                "y": 184.06585183337492
             }
         },
         "level-10.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
             "scale": 3.13203125,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 319.92017959590925,
-                "y": 183.74657021701174
+                "x": 319.7605387877276,
+                "y": 184.06585183337492
             }
         }
     },
@@ -131,13 +134,29 @@
     "openFiles": [
         "Pixel Adventure.tsx",
         "level-01.tmx",
-        "level-02.tmx"
+        "level-02.tmx",
+        "level-03.tmx",
+        "level-04.tmx",
+        "level-05.tmx",
+        "level-06.tmx",
+        "level-07.tmx",
+        "level-08.tmx",
+        "level-09.tmx",
+        "level-10.tmx"
     ],
     "project": "Pixel_Adventure.tiled-project",
     "property.type": "float",
     "recentFiles": [
         "Pixel Adventure.tsx",
         "level-01.tmx",
+        "level-10.tmx",
+        "level-09.tmx",
+        "level-08.tmx",
+        "level-07.tmx",
+        "level-06.tmx",
+        "level-05.tmx",
+        "level-04.tmx",
+        "level-03.tmx",
         "level-02.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
