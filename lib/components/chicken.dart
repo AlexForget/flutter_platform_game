@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:flame/components.dart';
+import 'package:platfom_game/components/player.dart';
 import 'package:platfom_game/pixel_adventure.dart';
 
 enum State {
@@ -21,9 +23,18 @@ class Chicken extends SpriteAnimationGroupComponent
     this.offPos = 0,
   });
 
-  static const stepTime = 0.5;
+  static const stepTime = 0.05;
+  static const tileSize = 16;
+  static const runSpeed = 80;
   final textureSize = Vector2(32, 34);
 
+  Vector2 velocity = Vector2.zero();
+  double rangeNeg = 0;
+  double rangePos = 0;
+  double moveDirection = 1;
+  double targetDirection = -1;
+
+  late final Player player;
   late final SpriteAnimation _idleAnimation;
   late final SpriteAnimation _runAnimation;
   late final SpriteAnimation _hitAnimation;
@@ -31,8 +42,17 @@ class Chicken extends SpriteAnimationGroupComponent
   @override
   FutureOr<void> onLoad() {
     debugMode = true;
+    player = game.player;
     _loadAllAnimations();
+    _calculateRanger();
     return super.onLoad();
+  }
+
+  @override
+  void update(double dt) {
+    _updateState();
+    _movement(dt);
+    super.update(dt);
   }
 
   void _loadAllAnimations() {
@@ -58,5 +78,44 @@ class Chicken extends SpriteAnimationGroupComponent
         textureSize: textureSize,
       ),
     );
+  }
+
+  void _calculateRanger() {
+    rangeNeg = position.x - offNeg * tileSize;
+    rangePos = position.x + offPos * tileSize;
+  }
+
+  void _movement(dt) {
+    velocity.x = 0;
+
+    double playerOffset = (player.scale.x > 0) ? 0 : -player.width;
+    double chickenOffset = (scale.x > 0) ? 0 : -width;
+
+    if (playerInRange()) {
+      targetDirection =
+          (player.x + playerOffset < position.x + chickenOffset) ? -1 : 1;
+      velocity.x = targetDirection * runSpeed;
+    }
+
+    moveDirection = lerpDouble(moveDirection, targetDirection, 1) ?? 1;
+
+    position.x += velocity.x * dt;
+  }
+
+  bool playerInRange() {
+    double playerOffset = (player.scale.x > 0) ? 0 : -player.width;
+
+    return player.x + playerOffset >= rangeNeg &&
+        player.x + playerOffset <= rangePos &&
+        player.y + player.height > position.y &&
+        player.y < position.y + height;
+  }
+
+  void _updateState() {
+    current = (velocity.x != 0) ? State.run : State.idle;
+    if ((moveDirection > 0 && scale.x > 0) ||
+        (moveDirection < 0 && scale.x < 0)) {
+      flipHorizontallyAroundCenter();
+    }
   }
 }
