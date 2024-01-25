@@ -4,6 +4,7 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame/palette.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/painting.dart';
 import 'package:platfom_game/components/jump_button.dart';
 import 'package:platfom_game/components/left_button.dart';
@@ -21,8 +22,8 @@ class PixelAdventure extends FlameGame
   Color backgroundColor() => const Color(0xff211f30);
   late CameraComponent cam;
   Player player = Player(character: 'Mask Dude');
-  bool showControls = false;
-  bool playSounds = false;
+  bool showControls = true;
+  bool playSounds = true;
   double soundVolume = 1.0;
   List<String> levelNames = [
     'level-01.tmx',
@@ -36,12 +37,19 @@ class PixelAdventure extends FlameGame
     'level-09.tmx',
     'level-10.tmx',
   ];
-  int currentLevelIndex = 1;
+  int currentLevelIndex = 0;
 
   @override
   FutureOr<void> onLoad() async {
     // Load all images into cache
     await images.loadAllImages();
+
+    if (playSounds) {
+      FlameAudio.bgm.play(
+        'music2.mp3',
+        volume: soundVolume,
+      );
+    }
 
     _loadLevel();
 

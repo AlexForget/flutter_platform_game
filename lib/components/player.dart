@@ -5,6 +5,7 @@ import 'package:flame/components.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/services.dart';
 import 'package:platfom_game/components/checkoint.dart';
+import 'package:platfom_game/components/chicken.dart';
 import 'package:platfom_game/components/collision_block.dart';
 import 'package:platfom_game/components/custom_hitbox.dart';
 import 'package:platfom_game/components/fruit.dart';
@@ -40,7 +41,7 @@ class Player extends SpriteAnimationGroupComponent
   late final SpriteAnimation disappearingAnimation;
 
   final double _gravity = 9.8;
-  final double _jumpForce = 260;
+  final double jumpForce = 260;
   final double _terminalVelocity = 300;
   double horizontalMovement = 0;
   double moveSpeed = 100;
@@ -115,8 +116,9 @@ class Player extends SpriteAnimationGroupComponent
       Set<Vector2> intersectionPoints, PositionComponent other) {
     if (!reachCheckpoint) {
       if (other is Fruit) other.collidedWithPlayer();
-      if (other is Saw) _repawn();
+      if (other is Saw) _respawn();
       if (other is Checkpoint) _reachCheckpoint();
+      if (other is Chicken) other.collidedWithPlayer();
     }
     super.onCollisionStart(intersectionPoints, other);
   }
@@ -213,7 +215,7 @@ class Player extends SpriteAnimationGroupComponent
         volume: game.soundVolume,
       );
     }
-    velocity.y = -_jumpForce;
+    velocity.y = -jumpForce;
     position.y += velocity.y * dt;
     isOnGround = false;
     hasJump = false;
@@ -241,7 +243,7 @@ class Player extends SpriteAnimationGroupComponent
 
   void _applyGravity(double dt) {
     velocity.y += _gravity;
-    velocity.y = velocity.y.clamp(-_jumpForce, _terminalVelocity);
+    velocity.y = velocity.y.clamp(-jumpForce, _terminalVelocity);
     position.y += velocity.y * dt;
   }
 
@@ -278,7 +280,7 @@ class Player extends SpriteAnimationGroupComponent
     }
   }
 
-  void _repawn() async {
+  void _respawn() async {
     if (game.playSounds) {
       FlameAudio.play(
         'hit.wav',
@@ -330,5 +332,9 @@ class Player extends SpriteAnimationGroupComponent
     const waitToChangeDuration = Duration(seconds: 1);
 
     Future.delayed(waitToChangeDuration, () => game.loadNextLevel());
+  }
+
+  void collidedWithEnemy() {
+    _respawn();
   }
 }
