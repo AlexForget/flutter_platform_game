@@ -4,7 +4,7 @@ import 'dart:ui';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame_audio/flame_audio.dart';
-import 'package:platfom_game/components/player.dart';
+import 'package:platfom_game/components/actors/player.dart';
 import 'package:platfom_game/pixel_adventure.dart';
 
 enum State {

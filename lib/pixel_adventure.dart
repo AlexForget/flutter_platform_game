@@ -6,11 +6,11 @@ import 'package:flame/game.dart';
 import 'package:flame/palette.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/painting.dart';
-import 'package:platfom_game/components/jump_button.dart';
-import 'package:platfom_game/components/left_button.dart';
-import 'package:platfom_game/components/player.dart';
-import 'package:platfom_game/components/level.dart';
-import 'package:platfom_game/components/right_button.dart';
+import 'package:platfom_game/components/ui/jump_button.dart';
+import 'package:platfom_game/components/ui/left_button.dart';
+import 'package:platfom_game/components/actors/player.dart';
+import 'package:platfom_game/components/level_elements/level.dart';
+import 'package:platfom_game/components/ui/right_button.dart';
 
 class PixelAdventure extends FlameGame
     with
@@ -29,13 +29,6 @@ class PixelAdventure extends FlameGame
     'level-01.tmx',
     'level-02.tmx',
     'level-03.tmx',
-    'level-04.tmx',
-    'level-05.tmx',
-    'level-06.tmx',
-    'level-07.tmx',
-    'level-08.tmx',
-    'level-09.tmx',
-    'level-10.tmx',
   ];
   int currentLevelIndex = 0;
 
@@ -43,10 +36,12 @@ class PixelAdventure extends FlameGame
   FutureOr<void> onLoad() async {
     // Load all images into cache
     await images.loadAllImages();
+    await FlameAudio.audioCache.load('music.wav');
+    FlameAudio.bgm.initialize();
 
     if (playSounds) {
       FlameAudio.bgm.play(
-        'music2.mp3',
+        'music2.wav',
         volume: soundVolume,
       );
     }
@@ -84,8 +79,8 @@ class PixelAdventure extends FlameGame
 
       cam = CameraComponent.withFixedResolution(
         world: world,
-        width: 640,
-        height: 360,
+        width: 800, // 640
+        height: 450, // 360
       );
       cam.priority = 0;
       cam.viewfinder.anchor = Anchor.topLeft;

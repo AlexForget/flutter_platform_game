@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:platfom_game/components/player.dart';
+import 'package:platfom_game/components/actors/player.dart';
 
 class Checkpoint extends SpriteAnimationComponent
     with HasGameRef, CollisionCallbacks {

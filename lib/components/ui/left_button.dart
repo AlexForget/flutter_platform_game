@@ -8,7 +8,7 @@ class LeftButton extends SpriteComponent
     with HasGameRef<PixelAdventure>, TapCallbacks {
   LeftButton();
 
-  final margin = 40.0;
+  final margin = 20.0;
   final buttonSize = 64;
 
   @override

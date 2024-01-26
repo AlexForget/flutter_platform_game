@@ -8,8 +8,8 @@ class RightButton extends SpriteComponent
     with HasGameRef<PixelAdventure>, TapCallbacks {
   RightButton();
 
-  final xMargin = 60.0;
-  final yMargin = 40.0;
+  final xMargin = 40.0;
+  final yMargin = 20.0;
   final buttonSize = 64;
 
   @override

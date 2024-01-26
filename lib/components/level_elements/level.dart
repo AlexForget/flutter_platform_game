@@ -2,13 +2,13 @@ import 'dart:async';
 
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
-import 'package:platfom_game/components/background_tile.dart';
-import 'package:platfom_game/components/checkoint.dart';
-import 'package:platfom_game/components/chicken.dart';
-import 'package:platfom_game/components/collision_block.dart';
-import 'package:platfom_game/components/fruit.dart';
-import 'package:platfom_game/components/player.dart';
-import 'package:platfom_game/components/saw.dart';
+import 'package:platfom_game/components/level_elements/background_tile.dart';
+import 'package:platfom_game/components/items/checkoint.dart';
+import 'package:platfom_game/components/actors/chicken.dart';
+import 'package:platfom_game/components/level_elements/collision_block.dart';
+import 'package:platfom_game/components/items/fruit.dart';
+import 'package:platfom_game/components/actors/player.dart';
+import 'package:platfom_game/components/ostacles/saw.dart';
 import 'package:platfom_game/pixel_adventure.dart';
 
 class Level extends World with HasGameRef<PixelAdventure> {

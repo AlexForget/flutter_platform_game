@@ -4,12 +4,12 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/services.dart';
-import 'package:platfom_game/components/checkoint.dart';
-import 'package:platfom_game/components/chicken.dart';
-import 'package:platfom_game/components/collision_block.dart';
-import 'package:platfom_game/components/custom_hitbox.dart';
-import 'package:platfom_game/components/fruit.dart';
-import 'package:platfom_game/components/saw.dart';
+import 'package:platfom_game/components/items/checkoint.dart';
+import 'package:platfom_game/components/actors/chicken.dart';
+import 'package:platfom_game/components/level_elements/collision_block.dart';
+import 'package:platfom_game/components/others/custom_hitbox.dart';
+import 'package:platfom_game/components/items/fruit.dart';
+import 'package:platfom_game/components/ostacles/saw.dart';
 import 'package:platfom_game/components/utils.dart';
 import 'package:platfom_game/pixel_adventure.dart';
 
