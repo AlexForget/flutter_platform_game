@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
@@ -27,9 +28,9 @@ class Player extends SpriteAnimationGroupComponent
     with HasGameRef<PixelAdventure>, KeyboardHandler, CollisionCallbacks {
   String character;
   Player({
-    position,
+    super.position,
     this.character = 'Ninja Frog',
-  }) : super(position: position);
+  }) : super();
 
   final double stepTime = 0.05;
   late final SpriteAnimation idleAnimation;
@@ -42,11 +43,12 @@ class Player extends SpriteAnimationGroupComponent
 
   final double _gravity = 9.8;
   final double jumpForce = 260;
-  final double _terminalVelocity = 300;
+  final double _terminalVelocity = 600;
   double horizontalMovement = 0;
-  double moveSpeed = 100;
   Vector2 startingPosition = Vector2.zero();
   Vector2 velocity = Vector2.zero();
+  double maxVelocity = 100.0;
+  double acceleration = 650.0;
   bool isOnGround = false;
   bool hasJump = false;
   bool gotHit = false;
@@ -204,7 +206,18 @@ class Player extends SpriteAnimationGroupComponent
       isOnGround = false; // to prevent a jump after falling from a platform
     }
 
-    velocity.x = horizontalMovement * moveSpeed;
+    if (horizontalMovement == -1) {
+      velocity.x = max(velocity.x - acceleration * dt, -maxVelocity);
+    } else if (horizontalMovement == 1) {
+      velocity.x = min(velocity.x + acceleration * dt, maxVelocity);
+    } else {
+      if (velocity.x > 0) {
+        velocity.x = max(velocity.x - (acceleration / 2.5) * dt, 0);
+      } else if (velocity.x < 0) {
+        velocity.x = min(velocity.x + (acceleration / 2.5) * dt, 0);
+      }
+    }
+
     position.x += velocity.x * dt;
   }
 
