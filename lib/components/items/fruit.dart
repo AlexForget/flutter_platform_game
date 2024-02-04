@@ -11,9 +11,9 @@ class Fruit extends SpriteAnimationComponent
   final String fruit;
   Fruit({
     this.fruit = 'Apple',
-    position,
-    size,
-  }) : super(position: position, size: size);
+    super.position,
+    super.size,
+  }) : super();
 
   final double stepTime = 0.05;
 
@@ -55,7 +55,6 @@ class Fruit extends SpriteAnimationComponent
           volume: game.soundVolume,
         );
       }
-      collected = true;
       animation = SpriteAnimation.fromFrameData(
         game.images.fromCache('Items/Fruits/Collected.png'),
         SpriteAnimationData.sequenced(

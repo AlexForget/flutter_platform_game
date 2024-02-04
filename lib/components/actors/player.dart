@@ -3,13 +3,12 @@ import 'dart:math';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:flame/input.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:platfom_game/components/items/checkoint.dart';
 import 'package:platfom_game/components/actors/chicken.dart';
 import 'package:platfom_game/components/level_elements/collision_block.dart';
+import 'package:platfom_game/components/level_elements/level.dart';
 import 'package:platfom_game/components/others/custom_hitbox.dart';
 import 'package:platfom_game/components/items/fruit.dart';
 import 'package:platfom_game/components/ostacles/saw.dart';
@@ -42,6 +41,9 @@ class Player extends SpriteAnimationGroupComponent
   late final SpriteAnimation hitAnimation;
   late final SpriteAnimation appearingAnimation;
   late final SpriteAnimation disappearingAnimation;
+
+  late Level level;
+  late Checkpoint checkpoint;
 
   final double _gravity = 19.8;
   final double stoppingGravity = 50;
@@ -80,6 +82,7 @@ class Player extends SpriteAnimationGroupComponent
       position: Vector2(hitbox.offsetX, hitbox.offsetY),
       size: Vector2(hitbox.width, hitbox.height),
     ));
+
     return super.onLoad();
   }
 
@@ -129,7 +132,7 @@ class Player extends SpriteAnimationGroupComponent
   void onCollisionStart(
       Set<Vector2> intersectionPoints, PositionComponent other) {
     if (!reachCheckpoint) {
-      if (other is Fruit) other.collidedWithPlayer();
+      if (other is Fruit) _onFruitCollision(other);
       if (other is Saw) _respawn();
       if (other is Checkpoint) _reachCheckpoint();
       if (other is Chicken) other.collidedWithPlayer();
@@ -341,33 +344,48 @@ class Player extends SpriteAnimationGroupComponent
   }
 
   Future<void> _reachCheckpoint() async {
-    if (game.playSounds) {
-      FlameAudio.play(
-        'disappear.wav',
-        volume: game.soundVolume,
-      );
+    if (checkpoint.isReachable) {
+      if (game.playSounds) {
+        FlameAudio.play(
+          'disappear.wav',
+          volume: game.soundVolume,
+        );
+      }
+      reachCheckpoint = true;
+      if (scale.x > 0) {
+        position = position - Vector2.all(32);
+      } else if (scale.x < 0) {
+        position = position + Vector2(32, -32);
+      }
+
+      current = PlayerState.disappearing;
+
+      await animationTicker?.completed;
+      animationTicker?.reset();
+
+      reachCheckpoint = false;
+      position = Vector2.all(-640);
+
+      const waitToChangeDuration = Duration(seconds: 1);
+
+      Future.delayed(waitToChangeDuration, () => game.loadNextLevel());
     }
-    reachCheckpoint = true;
-    if (scale.x > 0) {
-      position = position - Vector2.all(32);
-    } else if (scale.x < 0) {
-      position = position + Vector2(32, -32);
-    }
-
-    current = PlayerState.disappearing;
-
-    await animationTicker?.completed;
-    animationTicker?.reset();
-
-    reachCheckpoint = false;
-    position = Vector2.all(-640);
-
-    const waitToChangeDuration = Duration(seconds: 1);
-
-    Future.delayed(waitToChangeDuration, () => game.loadNextLevel());
   }
 
   void collidedWithEnemy() {
     _respawn();
+  }
+
+  void _onFruitCollision(Fruit fruit) {
+    level = parent! as Level;
+    checkpoint = level.children.whereType<Checkpoint>().first;
+    fruit.collidedWithPlayer();
+    if (fruit.collected) return;
+    fruit.collected = true;
+    level.nbFruits--;
+    if (level.nbFruits == 0) {
+      checkpoint.allFruitsAreCollected();
+      checkpoint.isReachable = true;
+    }
   }
 }

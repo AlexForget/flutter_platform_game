@@ -7,9 +7,11 @@ import 'package:platfom_game/components/actors/player.dart';
 class Checkpoint extends SpriteAnimationComponent
     with HasGameRef, CollisionCallbacks {
   Checkpoint({
-    position,
-    size,
-  }) : super(position: position, size: size);
+    super.position,
+    super.size,
+  }) : super();
+
+  bool isReachable = false;
 
   @override
   FutureOr<void> onLoad() {
@@ -37,11 +39,11 @@ class Checkpoint extends SpriteAnimationComponent
   @override
   void onCollisionStart(
       Set<Vector2> intersectionPoints, PositionComponent other) {
-    if (other is Player) _reachCheckpoint();
+    // if (other is Player) allFruitsAreCollected();
     super.onCollisionStart(intersectionPoints, other);
   }
 
-  Future<void> _reachCheckpoint() async {
+  Future<void> allFruitsAreCollected() async {
     animation = SpriteAnimation.fromFrameData(
       game.images.fromCache(
           'Items/Checkpoints/Checkpoint/Checkpoint (Flag Out) (64x64).png'),

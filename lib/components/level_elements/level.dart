@@ -20,6 +20,7 @@ class Level extends World with HasGameRef<PixelAdventure> {
   });
   late TiledComponent level;
   List<CollisionBlock> collisionBlocks = [];
+  int nbFruits = 0;
 
   @override
   FutureOr<void> onLoad() async {
@@ -63,6 +64,8 @@ class Level extends World with HasGameRef<PixelAdventure> {
                 fruit: spawnPoint.name,
                 position: Vector2(spawnPoint.x, spawnPoint.y),
                 size: Vector2(spawnPoint.width, spawnPoint.height));
+            nbFruits++;
+            print('nbFruits : $nbFruits');
             add(fruit);
             break;
           case 'Saw':
