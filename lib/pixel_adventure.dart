@@ -14,6 +14,7 @@ import 'package:platfom_game/components/ui/right_button.dart';
 
 class PixelAdventure extends FlameGame
     with
+        KeyboardEvents,
         HasKeyboardHandlerComponents,
         DragCallbacks,
         HasCollisionDetection,
@@ -23,7 +24,7 @@ class PixelAdventure extends FlameGame
   late CameraComponent cam;
   Player player = Player(character: 'Mask Dude');
   bool showControls = true;
-  bool playSounds = true;
+  bool playSounds = false;
   double soundVolume = 1.0;
   List<String> levelNames = [
     'level-01.tmx',

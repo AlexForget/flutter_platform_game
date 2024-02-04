@@ -3,8 +3,10 @@ import 'dart:math';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:flame/input.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:platfom_game/components/items/checkoint.dart';
 import 'package:platfom_game/components/actors/chicken.dart';
 import 'package:platfom_game/components/level_elements/collision_block.dart';
@@ -25,7 +27,7 @@ enum PlayerState {
 }
 
 class Player extends SpriteAnimationGroupComponent
-    with HasGameRef<PixelAdventure>, KeyboardHandler, CollisionCallbacks {
+    with HasGameRef<PixelAdventure>, CollisionCallbacks, KeyboardHandler {
   String character;
   Player({
     super.position,
@@ -41,18 +43,21 @@ class Player extends SpriteAnimationGroupComponent
   late final SpriteAnimation appearingAnimation;
   late final SpriteAnimation disappearingAnimation;
 
-  final double _gravity = 9.8;
-  final double jumpForce = 260;
-  final double _terminalVelocity = 600;
+  final double _gravity = 19.8;
+  final double stoppingGravity = 50;
+  final double jumpForce = 360;
+  final double _terminalVelocity = 400;
   double horizontalMovement = 0;
   Vector2 startingPosition = Vector2.zero();
   Vector2 velocity = Vector2.zero();
-  double maxVelocity = 100.0;
-  double acceleration = 650.0;
+  double maxVelocity = 125.0;
+  double acceleration = 850.0;
   bool isOnGround = false;
-  bool hasJump = false;
+  bool isJumping = false;
   bool gotHit = false;
   bool reachCheckpoint = false;
+  bool canJump = true;
+  bool jumpKeyIsPressed = false;
   List<CollisionBlock> collisionsBlocks = [];
   CustomHitbox hitbox = CustomHitbox(
     offsetX: 10,
@@ -81,11 +86,13 @@ class Player extends SpriteAnimationGroupComponent
   @override
   void update(double dt) {
     accumulatedTime += dt;
+    _checkCanJump();
 
     while (accumulatedTime >= fixedDeltaTime) {
       if (!gotHit && !reachCheckpoint) {
         _updatePlayerState();
         _updatePlayerMovement(fixedDeltaTime);
+        _playerJump(fixedDeltaTime);
         _checkHorizontalCollisions();
         _applyGravity(fixedDeltaTime);
         _checkVerticalCollision();
@@ -103,14 +110,19 @@ class Player extends SpriteAnimationGroupComponent
         keysPressed.contains(LogicalKeyboardKey.arrowLeft);
     final isRightKeyPressed = keysPressed.contains(LogicalKeyboardKey.keyD) ||
         keysPressed.contains(LogicalKeyboardKey.arrowRight);
+    jumpKeyIsPressed = keysPressed.contains(LogicalKeyboardKey.space) ||
+        keysPressed.contains(LogicalKeyboardKey.keyW);
 
     horizontalMovement += isLeftKeyPressed ? -1 : 0;
     horizontalMovement += isRightKeyPressed ? 1 : 0;
 
-    hasJump = keysPressed.contains(LogicalKeyboardKey.space) ||
-        keysPressed.contains(LogicalKeyboardKey.arrowUp);
+    if (canJump &&
+        (event.logicalKey == LogicalKeyboardKey.space ||
+            event.logicalKey == LogicalKeyboardKey.keyW)) {
+      isJumping = true;
+    }
 
-    return super.onKeyEvent(event, keysPressed);
+    return true;
   }
 
   @override
@@ -200,8 +212,6 @@ class Player extends SpriteAnimationGroupComponent
   }
 
   void _updatePlayerMovement(double dt) {
-    if (hasJump && isOnGround) _playerJump(dt);
-
     if (velocity.y > _gravity) {
       isOnGround = false; // to prevent a jump after falling from a platform
     }
@@ -221,17 +231,33 @@ class Player extends SpriteAnimationGroupComponent
     position.x += velocity.x * dt;
   }
 
-  void _playerJump(double dt) {
-    if (game.playSounds) {
-      FlameAudio.play(
-        'jump.wav',
-        volume: game.soundVolume,
-      );
+  void _checkCanJump() {
+    if (isOnGround && !jumpKeyIsPressed) {
+      canJump = true;
+    } else {
+      canJump = false;
     }
-    velocity.y = -jumpForce;
+  }
+
+  void _playerJump(double dt) {
+    if (isJumping && isOnGround) {
+      if (game.playSounds) {
+        FlameAudio.play(
+          'jump.wav',
+          volume: game.soundVolume,
+        );
+      }
+      velocity.y = -jumpForce;
+      position.y += velocity.y * dt;
+      isOnGround = false;
+      isJumping = false;
+    }
+  }
+
+  void _applyGravity(double dt) {
+    velocity.y += _gravity;
+    velocity.y = velocity.y.clamp(-jumpForce, _terminalVelocity);
     position.y += velocity.y * dt;
-    isOnGround = false;
-    hasJump = false;
   }
 
   void _checkHorizontalCollisions() {
@@ -252,12 +278,6 @@ class Player extends SpriteAnimationGroupComponent
         }
       }
     }
-  }
-
-  void _applyGravity(double dt) {
-    velocity.y += _gravity;
-    velocity.y = velocity.y.clamp(-jumpForce, _terminalVelocity);
-    position.y += velocity.y * dt;
   }
 
   void _checkVerticalCollision() {
