@@ -131,6 +131,8 @@ class Player extends SpriteAnimationGroupComponent
   @override
   void onCollisionStart(
       Set<Vector2> intersectionPoints, PositionComponent other) {
+    level = parent as Level;
+    checkpoint = level.children.whereType<Checkpoint>().first;
     if (!reachCheckpoint) {
       if (other is Fruit) _onFruitCollision(other);
       if (other is Saw) _respawn();
@@ -364,6 +366,7 @@ class Player extends SpriteAnimationGroupComponent
       animationTicker?.reset();
 
       reachCheckpoint = false;
+      checkpoint.isReachable = false;
       position = Vector2.all(-640);
 
       const waitToChangeDuration = Duration(seconds: 1);
@@ -377,8 +380,6 @@ class Player extends SpriteAnimationGroupComponent
   }
 
   void _onFruitCollision(Fruit fruit) {
-    level = parent! as Level;
-    checkpoint = level.children.whereType<Checkpoint>().first;
     fruit.collidedWithPlayer();
     if (fruit.collected) return;
     fruit.collected = true;

@@ -29,7 +29,6 @@ class PixelAdventure extends FlameGame
   List<String> levelNames = [
     'level-01.tmx',
     'level-02.tmx',
-    'level-03.tmx',
   ];
   int currentLevelIndex = 0;
 

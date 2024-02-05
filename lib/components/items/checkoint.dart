@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:platfom_game/components/actors/player.dart';
 
 class Checkpoint extends SpriteAnimationComponent
     with HasGameRef, CollisionCallbacks {
@@ -11,10 +10,11 @@ class Checkpoint extends SpriteAnimationComponent
     super.size,
   }) : super();
 
-  bool isReachable = false;
+  late bool isReachable;
 
   @override
   FutureOr<void> onLoad() {
+    isReachable = false;
     // debugMode = true;
     add(
       RectangleHitbox(
