@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <object name="Chicken" type="Chicken" width="32" height="32">
+  <properties>
+   <property name="offNeg" type="float" value="12"/>
+   <property name="offPos" type="float" value="5"/>
+  </properties>
+ </object>
+</template>

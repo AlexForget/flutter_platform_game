@@ -3,8 +3,9 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "level-03.tmx",
+    "activeFile": "level-02.tmx",
     "expandedProjectPaths": [
+        "template",
         "."
     ],
     "fileStates": {
@@ -14,24 +15,25 @@
         },
         "level-01.tmx": {
             "expandedObjectLayers": [
-                2
+                2,
+                3
             ],
             "scale": 1.7872,
-            "selectedLayer": 2,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 395.59086839749335,
-                "y": 276.68979409131606
+                "x": 395.3111011638316,
+                "y": 276.689794091316
             }
         },
         "level-02.tmx": {
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 1.5,
-            "selectedLayer": 2,
+            "scale": 2,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 458,
-                "y": 202.33333333333331
+                "x": 393.75,
+                "y": 247.75
             }
         },
         "level-022.tmx": {
@@ -146,6 +148,14 @@
                 "x": 391.8092711804096,
                 "y": 224.37162358878152
             }
+        },
+        "level-12.tmx": {
+            "scale": 2.5709375,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 400.0486203962563,
+                "y": 224.23726753373046
+            }
         }
     },
     "last.imagePath": "/home/alexandreqc26/Projets/Flutter/flutter_platform_game/assets/images/Terrain",
@@ -158,31 +168,23 @@
     "openFiles": [
         "Pixel Adventure.tsx",
         "level-01.tmx",
-        "level-02.tmx",
-        "level-03.tmx",
-        "level-04.tmx",
-        "level-05.tmx",
-        "level-06.tmx",
-        "level-07.tmx",
-        "level-08.tmx",
-        "level-09.tmx",
-        "level-10.tmx"
+        "level-02.tmx"
     ],
     "project": "Pixel_Adventure.tiled-project",
     "property.type": "float",
     "recentFiles": [
-        "level-11.tmx",
-        "level-02.tmx",
-        "level-01.tmx",
-        "level-03.tmx",
         "Pixel Adventure.tsx",
+        "level-01.tmx",
+        "level-02.tmx",
+        "level-12.tmx",
+        "level-11.tmx",
+        "level-03.tmx",
         "level-10.tmx",
         "level-09.tmx",
         "level-08.tmx",
         "level-07.tmx",
         "level-06.tmx",
-        "level-05.tmx",
-        "level-04.tmx"
+        "level-05.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
