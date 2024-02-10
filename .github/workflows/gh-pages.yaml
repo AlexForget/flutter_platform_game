@@ -1,0 +1,20 @@
+name: Gh-Pages
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+      - uses: bluefireteam/flutter-gh-pages@v8
+        with:
+          baseHref: /flutter_platform_game/
+          webRenderer: canvaskit
+      # want to change this to 'flutter test'.
+      - name: Run tests
+        run: dart test
